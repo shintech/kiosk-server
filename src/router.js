@@ -10,5 +10,8 @@ export default function getRouter (options) {
   router.route('/employees/:id')
   .get(employees(options).show)
 
+  router.route('/employee/:id/punch')
+  .post(employees(options).punch)
+
   return router
 }

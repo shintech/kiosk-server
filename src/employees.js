@@ -30,5 +30,20 @@ export default function (options) {
     })
   }
 
+  queries.punch = (req, res) => {
+    const employeeID = parseInt(req.params.id)
+
+    db.none('UPDATE employees SET clocked_in = NOT clocked_in WHERE id = $1', [employeeID])
+    .then(() => {
+      res.status(200)
+      .json({
+        body: 'success'
+      })
+    })
+    .catch(err => {
+      logger.error(err)
+    })
+  }
+
   return queries
 }
